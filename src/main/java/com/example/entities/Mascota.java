@@ -12,6 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +25,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@SuperBuilder
 public class Mascota implements Serializable  {
 
     private static final long serialVersionUID = 1L;
@@ -40,4 +40,7 @@ private LocalDate fechaNacimiento;
 public enum Genero {
     HOMBRE, MUJER, OTRO
 }
+
+@ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.PERSIST)
+    private Cliente cliente;
 }

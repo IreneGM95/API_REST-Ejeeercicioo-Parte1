@@ -12,6 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +25,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@SuperBuilder
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -35,4 +35,11 @@ public class Cliente implements Serializable {
     private String nombre;
     private String apellidos;
     private LocalDate fechaAlta;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "cliente")
+    @JsonIgnore //para evitar recursibidad entre mascota y clientes (mascota llama a clientes, que a su vez llama a mascota)
+    private List<Mascota> mascotas;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.PERSIST)
+    private Hotel hotel;
 }

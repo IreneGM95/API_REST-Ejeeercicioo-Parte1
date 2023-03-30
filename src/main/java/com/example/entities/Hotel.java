@@ -23,9 +23,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@SuperBuilder
 public class Hotel implements Serializable{
-   .
+   
    private static final long serialVersionUID = 1L;
 
     @Id
@@ -33,4 +32,8 @@ public class Hotel implements Serializable{
     private int id;
 
     private String nombre; 
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "hotel")
+    @JsonIgnore //para evitar recursibidad entre cliente y presentación (cliente llama a presentación, que a su vez llama a cliente)
+    private List<Cliente> clientes;
 }
