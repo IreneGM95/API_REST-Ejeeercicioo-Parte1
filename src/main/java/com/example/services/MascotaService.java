@@ -1,6 +1,5 @@
 package com.example.services;
 
-package com.example.entities;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
