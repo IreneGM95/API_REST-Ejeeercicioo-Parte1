@@ -13,7 +13,10 @@ import com.example.entities.Hotel;
 
 public class HotelServiceImpl implements HotelService {
 
-    /** Creamos la variable de tipo Dao para poder inyectarle la capa DAO, puede resolverse con un @Autowire o mediante constructor: */
+    /**
+     * Creamos la variable de tipo Dao para poder inyectarle la capa DAO, puede
+     * resolverse con un @Autowire o mediante constructor:
+     */
     @Autowired
     private HotelDao hotelDao;
 
@@ -25,7 +28,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Page<Hotel> findAll(Pageable pageable) {
-        
+
         return hotelDao.findAll(pageable);
     }
 
@@ -36,13 +39,12 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Hotel save(Hotel Hotel) {
-       return hotelDao.save(Hotel);
+        return hotelDao.save(Hotel);
     }
 
     @Override
     public void delete(Hotel Hotel) {
-    hotelDao.delete(Hotel);
+        hotelDao.delete(Hotel);
     }
-
 
 }

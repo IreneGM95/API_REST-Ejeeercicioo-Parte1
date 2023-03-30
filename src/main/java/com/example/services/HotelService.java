@@ -17,5 +17,5 @@ public interface HotelService  {
     public Hotel findById (long id);
 
     public Hotel save (Hotel hotel);
-    public Hotel delete(Hotel hotel);
+    public void delete(Hotel hotel);
 }

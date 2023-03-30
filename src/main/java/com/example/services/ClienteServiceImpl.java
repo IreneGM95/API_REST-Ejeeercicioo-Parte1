@@ -14,6 +14,7 @@ import com.example.entities.Cliente;
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
+   
     /** Creamos la variable de tipo Dao para poder inyectarle la capa DAO, puede resolverse con un @Autowire o mediante constructor: */
     @Autowired
     private ClienteDao ClienteDao;

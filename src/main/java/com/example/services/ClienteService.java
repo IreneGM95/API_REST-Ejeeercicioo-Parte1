@@ -17,5 +17,5 @@ public interface ClienteService  {
     public Cliente findById (long id);
 
     public Cliente save (Cliente Cliente);
-    public Cliente delete(Cliente Cliente);
+    public void delete(Cliente Cliente);
 }

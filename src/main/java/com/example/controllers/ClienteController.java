@@ -9,5 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/productos") // todas las peticiones se hacen a traves de productos, no hace falta crear
                               // /listar, /alta...
 public class ClienteController {
+
+     /**IMPORTANTE: El método que recupera los clientes, tiene que ser capaz de hacerlo por pagina y siempre con
+ordenamiento */
     
 }
