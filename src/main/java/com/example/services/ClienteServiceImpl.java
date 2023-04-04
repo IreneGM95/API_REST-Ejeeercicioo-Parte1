@@ -12,39 +12,34 @@ import com.example.dao.ClienteDao;
 import com.example.entities.Cliente;
 
 @Service
-public class ClienteServiceImpl implements ClienteService {
+public class ClienteServiceImpl implements ClienteService{
 
-   
-    /** Creamos la variable de tipo Dao para poder inyectarle la capa DAO, puede resolverse con un @Autowire o mediante constructor: */
     @Autowired
-    private ClienteDao ClienteDao;
+    private ClienteDao clienteDao;
 
     @Override
     public List<Cliente> findAll(Sort sort) {
-        return ClienteDao.findAll(sort);
-
+       return clienteDao.findAll(sort);
     }
 
     @Override
     public Page<Cliente> findAll(Pageable pageable) {
-        
-        return ClienteDao.findAll(pageable);
+        return clienteDao.findAll(pageable);
     }
 
     @Override
     public Cliente findById(long id) {
-        return ClienteDao.findById(id);
+        return clienteDao.findById(id);
     }
 
     @Override
-    public Cliente save(Cliente Cliente) {
-       return ClienteDao.save(Cliente);
+    public Cliente save(Cliente cliente) {
+        return clienteDao.save(cliente);
     }
 
     @Override
-    public void delete(Cliente Cliente) {
-        ClienteDao.delete(Cliente);
+    public void delete(Cliente cliente) {
+        clienteDao.delete(cliente);;
     }
-
-
+    
 }

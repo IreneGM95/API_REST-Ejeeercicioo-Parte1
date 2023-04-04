@@ -18,7 +18,7 @@ public interface ClienteDao extends JpaRepository<Cliente, Long> {
      * 1. Recuperar la lista de Clientes ordenados
      * 2. Recuperar listado de Clientes paginados, es decir, que no traiga todos
      * los Clientes de golpe sino de 10 en 10, 20 en 20...
-     * 3. Consulta para recuperar las presentaciones con sus Clientes
+     * 3. Consulta para recuperar las hoteles con sus Clientes
      * correspondientes sin tener que realizar una subconsultala cual sería menos
      * eficiente que un join a las entidades utilizando HQL (Hibernate Query
      * Language)
@@ -26,25 +26,31 @@ public interface ClienteDao extends JpaRepository<Cliente, Long> {
 
     // Recuperar la lista de Clientes ordenados:
 
-    @Query(value = "select p from Cliente p left join fetch p.presentacion") // NO es una consulta de mysql, sino HQL
+    @Query(value = "select c from Cliente c inner join fetch c.hotel inner join fetch c.mascotas")
     public List<Cliente> findAll(Sort sort);
 
     // Recuperar listado de Clientes paginados:
 
-    @Query(value = "select p from Cliente p left join fetch p.presentacion", countQuery = "select count(p) from Cliente p left join p.presentacion")
+    @Query(value = "select c from Cliente c inner join fetch c.hotel inner join fetch c.mascotas", countQuery = "select count(c) from Cliente c left join c.hotel left join c.mascotas")
     public Page<Cliente> findAll(Pageable pageable);
-//devuelve el numero de Clientes fijados por el pageable
+    // devuelve el numero de Clientes fijados por el pageable
 
-
-    // Consulta para recuperar las presentaciones con sus Clientes utilizando HQL
+    // Consulta para recuperar las hoteles con sus Clientes utilizando HQL
     // (Hibernate Quer Language), se recupera por el id:
 
-    @Query(value = "select p from Cliente p left join fetch p.presentacion where p.id = :id")
+    @Query(value = "select c from Cliente c left join fetch c.hotel left join fetch c.mascotas where c.id = :id")
     public Cliente findById(long id);
+
+    //¿No harían falta?
+/**Método que permite eliminar un cliente:*/
+
+/**Método que permite guardar un cliente:*/
+
+/**Método que permite actualizar un cliente:*/
 
     /**
      * RECORDEMOS QUE: Cuando hemos creado las relaciones hemos especificado que
-     * la busqueda sea LAZY, para que no se traiga la presentacion siempre que se
+     * la busqueda sea LAZY, para que no se traiga la hotel siempre que se
      * busque un Cliente, porque serian dos consultas, o una consulta con una
      * subconsulta, que es menos eficiente que lo que vamos a hacer, hacer una sola
      * consulta relacionando las entidades, y digo las entidades, porque aunque
@@ -58,4 +64,3 @@ public interface ClienteDao extends JpaRepository<Cliente, Long> {
      * por la descripcion, etc.
      */
 }
-

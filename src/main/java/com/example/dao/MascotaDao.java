@@ -18,28 +18,29 @@ public interface MascotaDao extends JpaRepository<Mascota, Long> {
      * 1. Recuperar la lista de Mascotas ordenados
      * 2. Recuperar listado de Mascotas paginados, es decir, que no traiga todos
      * los Mascotas de golpe sino de 10 en 10, 20 en 20...
-     * 3. Consulta para recuperar las presentaciones con sus Mascotas
+     * 3. Consulta para recuperar las mascotaes con sus Mascotas
      * correspondientes sin tener que realizar una subconsultala cual sería menos
      * eficiente que un join a las entidades utilizando HQL (Hibernate Query
      * Language)
      */
 
-    // Recuperar la lista de Mascotas ordenados:
+//CORREGIR
 
-    @Query(value = "select p from Mascota p left join fetch p.presentacion") // NO es una consulta de mysql, sino HQL
-    public List<Mascota> findAll(Sort sort);
+    // // Recuperar la lista de Mascotas ordenados:
 
-    // Recuperar listado de Mascotas paginados:
+    // @Query(value = "select c from mascota c inner join fetch c.cliente inner join fetch c.mascotas")
+    // public List<Mascota> findAll(Sort sort);
 
-    @Query(value = "select p from Mascota p left join fetch p.presentacion", countQuery = "select count(p) from Mascota p left join p.presentacion")
-    public Page<Mascota> findAll(Pageable pageable);
-//devuelve el numero de Mascotas fijados por el pageable
+    // // Recuperar listado de mascotas paginados:
 
+    // @Query(value = "select c from mascota c inner join fetch c.cliente inner join fetch c.mascotas", countQuery = "select count(c) from mascota c left join c.cliente left join c.mascotas")
+    // public Page<Mascota> findAll(Pageable pageable);
+    // // devuelve el numero de mascotas fijados por el pageable
 
-    // Consulta para recuperar las presentaciones con sus Mascotas utilizando HQL
-    // (Hibernate Quer Language), se recupera por el id:
+    // // Consulta para recuperar las clientees con sus mascotas utilizando HQL
+    // // (Hibernate Quer Language), se recupera por el id:
 
-    @Query(value = "select p from Mascota p left join fetch p.presentacion where p.id = :id")
-    public Mascota findById(long id);
+    // @Query(value = "select c from mascota c left join fetch c.cliente left join fetch c.mascotas where c.id = :id")
+    // public Mascota findById(long id);
 
 }
